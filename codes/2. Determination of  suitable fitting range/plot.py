@@ -1,7 +1,7 @@
-# Determine the appropriate fitting interval based on the goodness of fit, 
+# Determine the appropriate fitting interval based on the goodness of fit,
 # the error of the solution and the fitting range.
-# Requirements: 1. The goodness of fit is greater than 0.99; 
-# 2. On the premise that the fitting range is as large as possible, 
+# Requirements: 1. The goodness of fit is greater than 0.99;
+# 2. On the premise that the fitting range is as large as possible,
 # the solution error should be as small as possible.
 
 import numpy as np
@@ -43,10 +43,10 @@ for ii in range(num):
 
         range_len[ii] = range_max -range_min
 
-    else: 
+    else:
         thres_err[ii] = 2
         range_len[ii] = 1
-    
+
         continue
 
 # Plot
@@ -70,5 +70,5 @@ ax2.tick_params(labelsize=16)
 
 plt.tight_layout()
 plt.savefig('results.jpg')
-          
+
 

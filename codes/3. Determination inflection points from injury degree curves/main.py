@@ -1,4 +1,4 @@
-# Solve for the threshold values corresponding to the inflection points of 
+# Solve for the threshold values corresponding to the inflection points of
 # the combined injury degree curves within the previously determined fitting range.
 
 import numpy as np
@@ -30,7 +30,7 @@ thres_len   = round(len(data)/K - 1)
 thresholds  = np.zeros(thres_len, dtype=float)
 
 for ii in range(thres_len):
-    
+
     thresholds[ii] = float(data[ii + 1].split()[0])
 
 # Start and end values of the fitting range.
@@ -41,7 +41,7 @@ thres_range_max = 0.6
 for ii, tmp in enumerate(thresholds):
 
     if tmp < thres_range_min:
-        
+
         continue
 
     else:
@@ -52,7 +52,7 @@ for ii, tmp in enumerate(thresholds):
 for ii, tmp in enumerate(thresholds):
 
     if tmp < thres_range_max:
-        
+
         continue
 
     else:
@@ -68,10 +68,10 @@ file_name2 = path + '\\' + 'inflection_points_all_for_plot_defi_1' + '_' + str(t
 
 with open(file_name1, 'a') as datatmp:
     datatmp.writelines('Within a given fitting range, fitting the original curve and calculating the inflection points, the whole results are below.\n')
-    
+
 with open(file_name2, 'a') as datatmp:
     datatmp.writelines('Within a given fitting range, fitting the original curve and calculating the inflection points, the points are below.\n')
-    
+
 
 # For different sets of combinations.
 for jj in range(len(case_num)):
@@ -81,7 +81,7 @@ for jj in range(len(case_num)):
 
     with open(file_name2, 'a') as datatmp:
         datatmp.writelines(str(case_num[jj]) + '_cases\n')
-    
+
     # For each curve.
     for kk in range(nn):
 

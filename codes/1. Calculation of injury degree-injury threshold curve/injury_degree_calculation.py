@@ -4,7 +4,7 @@ import numpy as np
 import copy as c
 
 
-def injury_degree(data, thresholds):  
+def injury_degree(data, thresholds):
 
     # For each threshold.
     for ii, threshold_tmp in enumerate(thresholds):
@@ -23,7 +23,7 @@ def injury_degree(data, thresholds):
 
             # The whole brain injury degree.
             injury_degree_1_ave = np.mean(injury_degree_1)
-            
+
             with open('injury_degree_defi_1', 'a') as datatmp:
                 datatmp.writelines(str(threshold_tmp) + '   ' + str(injury_degree_1_ave) + '\n')
 
@@ -38,13 +38,13 @@ def injury_degree(data, thresholds):
                 datatmp.writelines(str(threshold_tmp) + '   ' + str(injury_degree_3_ave) + '\n')
 
         else:
-            
+
             with open('injury_degree_defi_1', 'a') as datatmp:
                 datatmp.writelines(str(threshold_tmp) + '   0\n')
 
             with open('injury_degree_defi_2', 'a') as datatmp:
                 datatmp.writelines(str(threshold_tmp) + '   0\n')
-        
+
             with open('injury_degree_defi_3', 'a') as datatmp:
                 datatmp.writelines(str(threshold_tmp) + '   0\n')
         

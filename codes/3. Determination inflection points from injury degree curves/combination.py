@@ -1,4 +1,4 @@
-# Randomly select impact cases for combinations and write to files. 
+# Randomly select impact cases for combinations and write to files.
 
 import numpy as np
 import random
@@ -25,7 +25,7 @@ def combination(case_num, nn, K, path):
 
     # Combine cases.
     for ii, tmp_case_num in enumerate(case_num):
-        
+
         for jj in range(nn):
 
             Y = np.zeros(thres_len, dtype=float)
@@ -42,7 +42,7 @@ def combination(case_num, nn, K, path):
 
             with open(path1 + '\\' + 'combination_'+ str(jj), 'a') as data:
                 data.writelines('The combination of impact cases are ' + str(cases_tmp) + '\n')
-            
+
             for kk, tmpdata in enumerate(Y):
 
                 with open(path1 + '\\' + 'combination_'+ str(jj), 'a') as data:

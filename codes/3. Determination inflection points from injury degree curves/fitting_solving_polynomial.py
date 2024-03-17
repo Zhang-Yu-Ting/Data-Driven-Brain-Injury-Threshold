@@ -6,7 +6,7 @@ import sympy as sp
 from goodness_of_fit import goodness_of_fit
 
 def fitting_solving(data, thres_range, file_name1, file_name2, path1):
-    
+
     # The degree of polynomial fitting.
     fitting_num = [4, 5, 6, 7, 8]
 
@@ -20,7 +20,7 @@ def fitting_solving(data, thres_range, file_name1, file_name2, path1):
 
         p1 = np.polyfit(data[0], data[1], fitting_num[ii])
 
-        
+
         # Solve for complex roots and extract the real parts from them.
         x = sp.symbols('x')
 
@@ -49,7 +49,7 @@ def fitting_solving(data, thres_range, file_name1, file_name2, path1):
 
         # Calculate the goodness of fit.
         R_tmp = goodness_of_fit(data[1], fit_Y)
-        
+
         # Plot
         fig, ax = plt.subplots(nrows = 1, ncols = 3, figsize = [10, 3])
 
@@ -60,7 +60,7 @@ def fitting_solving(data, thres_range, file_name1, file_name2, path1):
         ax1.set_ylabel('D', fontsize = 16)
         ax1.tick_params(labelsize=15)
         ax1.text(0.4, 0.8, 'R$^{2}$ = ' + '%.3g' %R_tmp, transform = ax1.transAxes, fontsize = 16)
-                
+
         ax2 = ax[1]
         ax2.plot(data[0], diff_Y_fit)
         ax2.set_xlabel('$T_\mathrm{inj}$', fontsize = 16)
@@ -79,7 +79,7 @@ def fitting_solving(data, thres_range, file_name1, file_name2, path1):
         plt.xticks()
         plt.savefig(path1 + '\\' + str(fitting_num[ii]) + '.jpg')
         plt.close()
-        
+
 
         # Calculate the inflection point of the fitting curve.
         x_solution = sp.solve(f2, x)
@@ -89,22 +89,22 @@ def fitting_solving(data, thres_range, file_name1, file_name2, path1):
 
             with open(file_name1, 'a') as datatmp:
                 datatmp.writelines(str(fitting_num[ii]) + '   ' + 'no inflection point   ' + 'R^2 = ' + str(R_tmp) + '\n')
-            
+
             point_selected.append('none')
             point_all.append(-0.1)
             R.append(R_tmp)
             continue
 
         else:
-            
+
             R.append(R_tmp)
 
-            
+
             # Record results.
             with open(file_name1, 'a') as datatmp:
                 datatmp.writelines(str(fitting_num[ii]) + '   original_results_all\n')
 
-            
+
             # Write down the real solutions.
             # Select points corresponding to local maxima of the first detivaive, marked as 1;
             # Points corresponding to local minima of the first derivative, marked as 0-2;
@@ -132,14 +132,14 @@ def fitting_solving(data, thres_range, file_name1, file_name2, path1):
 
                             with open(file_name1, 'a') as datatmp:
                                 datatmp.writelines('          ' + str('%.4g' %tmp) + '    0-1\n')
-                        
+
                             continue
 
                         elif diff2_fit_func(tmp - tmp/100) < 0:
 
                             with open(file_name1, 'a') as datatmp:
                                 datatmp.writelines('          ' + str('%.4g' %tmp) + '    0-2\n')
-                        
+
                             continue
 
                         else:
@@ -150,19 +150,19 @@ def fitting_solving(data, thres_range, file_name1, file_name2, path1):
                             point_selected_tmp.append(tmp)
 
                             continue
-                    
+
                     else:
 
                         with open(file_name1, 'a') as datatmp:
                                 datatmp.writelines('          ' + str('%.4g' %tmp) + '    0-0\n')
-                        
+
                         continue
-                
+
                 else:
                     continue
 
             if len(point_selected_tmp) >= 1:
-                
+
                 point_all.append(min(point_selected_tmp))
 
             else:
@@ -188,27 +188,27 @@ def fitting_solving(data, thres_range, file_name1, file_name2, path1):
 
                 with open(file_name1, 'a') as datatmp:
                     datatmp.writelines('no inflection point   ' + 'R^2 = ' + str('%.4g' %R_tmp) + '\n')
-            
+
             else:
-            
+
                 # After all the solutions have been recorded, the next line records the R^2 of this fit.
                 with open(file_name1, 'a') as datatmp:
                     datatmp.writelines('    R^2 = ' + str('%.4g' %R_tmp) + '\n')
 
-    
+
     # Record the results for 3rd, 4th, 5th, 6th, and 7th degrees.
     with open(file_name2, 'a') as datatmp:
         datatmp.writelines('inflection_points   ' + str('%.4g' %point_all[0]) + ' ' + str('%.4g' %point_all[1]) + ' ' + str('%.4g' %point_all[2]) + ' ' + str('%.4g' %point_all[3]) + ' ' + str('%.4g' %point_all[4])  + '\n' )
         datatmp.writelines('              R^2   ' + str('%.4g' %R[0]) + ' ' + str('%.4g' %R[1]) + ' ' + str('%.4g' %R[2]) + ' ' + str('%.4g' %R[3]) + ' ' + str('%.4g' %R[4]) + '\n')
 
 
-        
-        
 
-                    
 
-            
 
-                
-                
+
+
+
+
+
+
                 

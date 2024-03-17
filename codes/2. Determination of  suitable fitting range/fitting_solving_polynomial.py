@@ -6,7 +6,7 @@ def fitting_solving(data, tmp_min, tmp_max):
 
     # Two types
     sorts = ['concrete', 'football']
-    
+
     # The degree of polynomial fitting.
     fitting_num = [3, 4, 5, 6, 7]
 
@@ -14,7 +14,7 @@ def fitting_solving(data, tmp_min, tmp_max):
 
     with open('results_all', 'a') as datatmp:
         datatmp.writelines('\n' + 'fitting_range ' + str(tmp_min) + ' - ' + str(tmp_max) + '\n')
-         
+
 
     for ww in range(2):
 
@@ -26,7 +26,7 @@ def fitting_solving(data, tmp_min, tmp_max):
 
             p1 = np.polyfit(data[0], data[1][ww], fitting_num[ii])
 
-            
+
             # Solve for complex roots and extract the real parts from them.
             x = sp.symbols('x')
 
@@ -52,7 +52,7 @@ def fitting_solving(data, tmp_min, tmp_max):
 
             # Calculate the goodness of fit.
             R_tmp = goodness_of_fit(data[1][ww], fit_Y)
-            
+
 
             # Calculate the inflection point of the fitting curve.
             x_solution = sp.solve(f2, x)
@@ -68,7 +68,7 @@ def fitting_solving(data, tmp_min, tmp_max):
             else:
 
                 R.append(R_tmp)
- 
+
                 # Convert the data type to complex numbers.
                 solution = [complex(item) for item in x_solution]
 
@@ -98,16 +98,16 @@ def fitting_solving(data, tmp_min, tmp_max):
                                 point_selected_tmp.append(tmp)
 
                                 continue
-                        
+
                         else:
 
                             continue
-                    
+
                     else:
                         continue
 
                 if len(point_selected_tmp) >= 1:
-                    
+
                     point_all.append(min(point_selected_tmp))
 
                 else:
@@ -136,13 +136,13 @@ def fitting_solving(data, tmp_min, tmp_max):
             datatmp.writelines('              R^2   ' + str('%.4g' %R[0]) + ' ' + str('%.4g' %R[1]) + ' ' + str('%.4g' %R[2]) + ' ' + str('%.4g' %R[3]) + ' ' + str('%.4g' %R[4]) + '\n')
 
 
-        
-        
 
-                    
 
-            
 
-                
-                
+
+
+
+
+
+
                 

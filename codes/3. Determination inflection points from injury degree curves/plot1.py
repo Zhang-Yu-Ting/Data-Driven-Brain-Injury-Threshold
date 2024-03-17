@@ -9,7 +9,6 @@ def plot1(file_name, case_num, nn, path):
         data = data.readlines()
 
     # X coordinate.
-    # X = [3, 4, 5, 6, 7]
     X = [4, 5, 6, 7, 8]
 
     # Preset Y_all and R_all.
@@ -32,7 +31,7 @@ def plot1(file_name, case_num, nn, path):
 
             tmp1 = data[tt + 1].split()[1:]
             tmp2 = data[tt + 2].split()[1:]
-            
+
             for tmpdata in tmp1:
                 Y_tmp.append(float(tmpdata))
 
@@ -60,7 +59,7 @@ def plot1(file_name, case_num, nn, path):
         # Y refers to the 3-7th results obtained for a specific curve.
         for jj, Y in enumerate(combinations_all):
 
-            path1 = path + '\\' + str(case_num[ii]) + '_' + 'cases'+ '\\' + 'combination_'+ str(jj) 
+            path1 = path + '\\' + str(case_num[ii]) + '_' + 'cases'+ '\\' + 'combination_'+ str(jj)
 
             fig, ax = plt.subplots(figsize = [6, 4])
 
@@ -92,16 +91,16 @@ def plot1(file_name, case_num, nn, path):
 
         path1 = path + '\\' + str(case_num[ii]) + '_' + 'cases'
 
-        for jj, Y in enumerate(combinations_all): 
+        for jj, Y in enumerate(combinations_all):
 
             ax1.plot(X, Y, marker = '*', c = '#006400')
             ax1.set_xticks([])
             ax1.set_yticks([])
-            
+
             ax2.scatter(X, R_all[ii][jj], c = 'orange')
             ax2.set_xticks([])
             ax2.set_yticks([])
-           
+
         ax1.set_yticks([-0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5])
         ax1.set_xlabel('Fitting degree', fontsize = 16)
         ax1.set_ylabel('$T_\mathrm{inj}$', fontsize = 16)

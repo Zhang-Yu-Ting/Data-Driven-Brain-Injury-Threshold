@@ -1,12 +1,12 @@
-# Before using polynomials to solve for the inflection points of the injury degree-injury 
+# Before using polynomials to solve for the inflection points of the injury degree-injury
 # threshold curve, it is necessary to determine an appropriate fitting range.
 # The impact cases of two types form two composite injury degree-injury threshold curves.
-# 50 Head-concrete impacts form the first injury degree curve; 50 Head-football impacts 
+# 50 Head-concrete impacts form the first injury degree curve; 50 Head-football impacts
 # form the second injury degree curve.
 # Manually set different fitting ranges, fit the two original curves within these ranges,
-# obtain the threshold corresponding the inflection points and fitting goodness, 
+# obtain the threshold corresponding the inflection points and fitting goodness,
 # and write them into 'result_all'.
-# Based on 'result_all', select the appropriate fitting range with the smallest threshold 
+# Based on 'result_all', select the appropriate fitting range with the smallest threshold
 # value error and the highest fitting goodness.
 
 import numpy as np
@@ -28,7 +28,7 @@ thres_len   = round(len(data_c)/K - 1)
 thresholds  = np.zeros(thres_len, dtype=float)
 
 for ii in range(thres_len):
-    
+
     thresholds[ii] = float(data_c[ii + 1].split()[0])
 
 
@@ -51,13 +51,13 @@ thres_range_max = [0.5, 0.55, 0.6, 0.65, 0.7, 0.75]
 
 # Fit curves to find the inflection points and record.
 for ii, tmp_max in enumerate(thres_range_max):
-    
+
     for jj, tmp_min in enumerate(thres_range_min):
 
         for kk, tmp in enumerate(thresholds):
 
             if tmp < tmp_min:
-                
+
                 continue
 
             else:
@@ -68,7 +68,7 @@ for ii, tmp_max in enumerate(thres_range_max):
         for kk, tmp in enumerate(thresholds):
 
             if tmp < tmp_max:
-                
+
                 continue
 
             else:
@@ -80,9 +80,9 @@ for ii, tmp_max in enumerate(thres_range_max):
         Y_c = injury_degree_c[range_l : range_r]
         Y_f = injury_degree_f[range_l : range_r]
 
-        Y = [Y_c, Y_f] 
+        Y = [Y_c, Y_f]
 
         # Fitting injury degree curves in [tmp_min,tmp_max]
         fitting_solving([X, Y], tmp_min, tmp_max)
-        
+
 

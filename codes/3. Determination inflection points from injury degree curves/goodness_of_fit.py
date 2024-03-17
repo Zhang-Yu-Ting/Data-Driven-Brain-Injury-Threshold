@@ -1,5 +1,5 @@
 def goodness_of_fit(data, fitting_data):
-    
+
 
     y_mean = sum(data) / len(data)
 
