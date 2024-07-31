@@ -1,4 +1,4 @@
-# Randomly select impact cases for combinations and write to files.
+# Randomly select impact cases for combinations and write to files. 
 
 import numpy as np
 import random
@@ -7,7 +7,7 @@ import os
 
 def combination(case_num, nn, K, path):
 
-    with open('injury_degree_defi_1_both_MPS', 'r') as data:
+    with open('injury_degree_both_MPS', 'r') as data:
         data = data.readlines()
 
     thres_len           = round(len(data)/K - 1)
@@ -25,7 +25,7 @@ def combination(case_num, nn, K, path):
 
     # Combine cases.
     for ii, tmp_case_num in enumerate(case_num):
-
+        
         for jj in range(nn):
 
             Y = np.zeros(thres_len, dtype=float)
@@ -37,12 +37,31 @@ def combination(case_num, nn, K, path):
             if not os.path.exists(path1):
                 os.makedirs(path1)
 
-            for kk, cases_tmptmp in enumerate(cases_tmp):
-                Y += injury_degree[cases_tmptmp - 1] / tmp_case_num
+            for kk in range(thres_len):
+
+                num_tmp1 = 0
+
+                for ll, cases_tmptmp in enumerate(cases_tmp):
+
+                    if injury_degree[ll][kk] > 0:
+
+                        num_tmp1 += 1
+
+                    else:
+                        continue
+
+                if num_tmp1 > 0:
+                    
+                    for ll, cases_tmptmp in enumerate(cases_tmp):
+
+                        Y[kk] += injury_degree[cases_tmptmp - 1][kk] / num_tmp1
+
+                else:
+                    continue
 
             with open(path1 + '\\' + 'combination_'+ str(jj), 'a') as data:
                 data.writelines('The combination of impact cases are ' + str(cases_tmp) + '\n')
-
+            
             for kk, tmpdata in enumerate(Y):
 
                 with open(path1 + '\\' + 'combination_'+ str(jj), 'a') as data:
